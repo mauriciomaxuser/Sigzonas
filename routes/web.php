@@ -14,7 +14,7 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('/register', [RegisterController::class, 'showRegister'])->name('register');
 Route::post('/register', [RegisterController::class, 'register']);
 
-// Ruta protegida (requiere login)
+
 Route::get('/home', function () {
     return view('home');
 })->middleware('auth');

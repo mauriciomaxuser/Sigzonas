@@ -8,13 +8,13 @@ use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
-    // Mostrar el formulario de login
+   
     public function showLoginForm()
     {
-        return view('login'); // Asegúrate de tener esta vista
+        return view('login'); 
     }
 
-    // Procesar el login
+
     public function login(Request $request)
     {
         // Validar datos recibidos
@@ -23,11 +23,11 @@ class LoginController extends Controller
             'password' => ['required'],
         ]);
 
-        // Intentar autenticar
+        
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            // Puedes verificar el rol si quieres hacer redirección condicional
+            
             if (Auth::user()->rol === 'admin') {
                 return redirect()->intended('/admin/dashboard');
             } else {
@@ -35,13 +35,12 @@ class LoginController extends Controller
             }
         }
 
-        // Si falla el login, regresar con error
+        
         return back()->withErrors([
             'email' => 'Las credenciales no coinciden con nuestros registros.',
         ])->onlyInput('email');
     }
 
-    // Cerrar sesión
     public function logout(Request $request)
     {
         Auth::logout();
