@@ -62,7 +62,9 @@
                 </div>
                 <a href="{{ url('/contact') }}" class="nav-item nav-link">Contact</a>
             </div>
-            <a href="#" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">Get A Quote<i class="fa fa-arrow-right ms-3"></i></a>
+            <a href="/login" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">
+                Salir<i class="fa fa-arrow-right ms-3"></i>
+            </a>
         </div>
     </nav>
     <!-- Navbar End -->
