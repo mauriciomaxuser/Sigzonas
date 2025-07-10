@@ -4,19 +4,20 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
-    // Mostrar formulario login
-    public function showLogin()
+    // Mostrar el formulario de login
+    public function showLoginForm()
     {
-        return view('login');
+        return view('login'); // Asegúrate de tener esta vista
     }
 
-    // Procesar login con POST
+    // Procesar el login
     public function login(Request $request)
     {
-        // Validar los campos
+        // Validar datos recibidos
         $credentials = $request->validate([
             'email' => ['required', 'email'],
             'password' => ['required'],
@@ -24,19 +25,23 @@ class LoginController extends Controller
 
         // Intentar autenticar
         if (Auth::attempt($credentials)) {
-            // Regenera sesión para evitar fijación de sesión
             $request->session()->regenerate();
 
-            return redirect('/home');
+            // Puedes verificar el rol si quieres hacer redirección condicional
+            if (Auth::user()->rol === 'admin') {
+                return redirect()->intended('/admin/dashboard');
+            } else {
+                return redirect()->intended('/home');
+            }
         }
 
-        // Si falla, retorna con error
+        // Si falla el login, regresar con error
         return back()->withErrors([
             'email' => 'Las credenciales no coinciden con nuestros registros.',
         ])->onlyInput('email');
     }
 
-    // Opcional: Método logout
+    // Cerrar sesión
     public function logout(Request $request)
     {
         Auth::logout();
