@@ -22,3 +22,4 @@ Route::get('/home', function () {
 
 
 // ------------------------------------------------------ Rutas para Zona de Riesgo -------------------------------------------------
+Route::resource('riesgos', RiesgoController::class);
