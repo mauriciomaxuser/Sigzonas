@@ -22,7 +22,8 @@ class RiesgoController extends Controller
      */
     public function create()
     {
-        //
+        
+        return view('riesgos.create');
     }
 
     /**
